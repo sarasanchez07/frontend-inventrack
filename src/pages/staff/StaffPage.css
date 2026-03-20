@@ -409,8 +409,10 @@
     .search-input {
         width: 100%;
         padding: 0 16px;
-        height: 48px; /* Slightly taller on mobile */
+        height: 52px; /* Increased height as requested */
+        font-size: 1.1rem;
     }
+
 
     .staff-search-buttons {
         display: flex;

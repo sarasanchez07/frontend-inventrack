@@ -198,7 +198,8 @@ const CategoriesPage = () => {
                         <input
                             type="text"
                             className="search-input"
-                            placeholder="Busca un categoría por su nombre..."
+                            placeholder="Busca una categoría por su nombre..."
+
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             onKeyDown={handleKeyDown}
