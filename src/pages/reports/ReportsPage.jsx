@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import '../dashboard/Dashboards.css';
 import './ReportsPage.css'; // Add the CSS import
 import { reportService } from '../../services/reportService';
+import dashboardService from '../../services/dashboardService';
 
 
 const ReportsPage = () => {
@@ -19,12 +20,23 @@ const ReportsPage = () => {
     const [movementType, setMovementType] = useState('');
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [inventoryName, setInventoryName] = useState('');
 
     const title = isAdmin && inventoryId
-        ? `Reporte del Inventario ${inventoryId}`
+        ? `Reporte del Inventario ${inventoryName || inventoryId}`
         : isAdmin
             ? 'Reporte General'
-            : 'Tus Reportes';
+            : (inventoryName ? `Reporte del Inventario ${inventoryName}` : 'Tus Reportes');
+
+    const fetchInventoryName = async () => {
+        if (!inventoryId) return;
+        try {
+            const data = await dashboardService.getInventory(inventoryId);
+            setInventoryName(data.name);
+        } catch (error) {
+            console.error('Error fetching inventory name:', error);
+        }
+    };
 
     const fetchReports = async () => {
         setLoading(true);
@@ -46,6 +58,7 @@ const ReportsPage = () => {
 
     useEffect(() => {
         fetchReports();
+        fetchInventoryName();
     }, [inventoryId]);
 
     const handleGenerateReport = () => {
