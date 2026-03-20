@@ -138,8 +138,11 @@ const StaffPage = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <button className="btn-search-staff">Buscar</button>
-                        <button className="btn-clear-staff" onClick={() => setSearchQuery('')}>Limpiar</button>
+                        <div className="staff-search-buttons">
+                            <button className="btn-search-staff">Buscar</button>
+                            <button className="btn-clear-staff" onClick={() => setSearchQuery('')}>Limpiar</button>
+                        </div>
+
                     </div>
                 </div>
 

@@ -14,10 +14,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Changed from flex-start to center */
     border-bottom: 2px solid var(--gray-200);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    gap: 1rem;
 }
+
 
 .categories-header-left {
     display: flex;
@@ -192,7 +193,10 @@
     border-radius: 12px;
     box-shadow: var(--card-shadow);
     min-height: 200px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
+
 
 .categories-table {
     width: 100%;
@@ -516,24 +520,80 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .categories-header {
-        flex-direction: column;
-        gap: 1rem;
+        flex-wrap: wrap; /* Allow wrapping but try to stay side-by-side */
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .categories-header-left {
+        flex: 1; /* Allow title to take space */
+        min-width: 150px;
+    }
+
+    .categories-title {
+        font-size: 1.4rem;
+    }
+
+    .btn-register-category {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+
+    .categories-subtitle {
+        display: none; /* Hide subtitle on very small screens to save space */
     }
 
     .search-row {
         flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
     }
 
-    .search-input,
+    .search-input {
+        width: 100%;
+        padding: 0.85rem 1rem; /* Bigger input as requested */
+        font-size: 1rem;
+    }
+
     .search-inventory-filter {
+        width: 100%;
+        padding: 0.85rem 1rem;
+    }
+
+    .search-buttons-group {
+        display: flex;
+        gap: 0.75rem;
         width: 100%;
     }
 
-    .action-buttons {
-        flex-direction: column;
+    .btn-search, .btn-clear {
+        flex: 1;
+        padding: 0.85rem;
+        justify-content: center;
+        display: flex;
+        align-items: center;
     }
 
     .categories-table {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        min-width: 600px; /* Force scroll */
+    }
+
+    .categories-table thead th:nth-child(1),
+    .categories-table tbody td:nth-child(1) {
+        padding-left: 1rem;
     }
 }
+
+@media (max-width: 480px) {
+    .categories-header {
+        /* On very small devices, keep them aligned nicely even if wrapped */
+        justify-content: space-between;
+    }
+
+    .search-buttons-group {
+        flex-direction: row; /* Keep buttons side by side if possible */
+    }
+}
+
