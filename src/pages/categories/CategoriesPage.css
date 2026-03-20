@@ -520,13 +520,15 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .categories-header {
-        flex-wrap: wrap; /* Allow wrapping but try to stay side-by-side */
+        flex-wrap: wrap;
+        /* Allow wrapping but try to stay side-by-side */
         align-items: center;
         gap: 0.75rem;
     }
 
     .categories-header-left {
-        flex: 1; /* Allow title to take space */
+        flex: 1;
+        /* Allow title to take space */
         min-width: 150px;
     }
 
@@ -541,7 +543,8 @@
 
 
     .categories-subtitle {
-        display: none; /* Hide subtitle on very small screens to save space */
+        display: none;
+        /* Hide subtitle on very small screens to save space */
     }
 
     .search-row {
@@ -552,8 +555,9 @@
 
     .search-input {
         width: 100%;
-        padding: 0 24px !important;
-        height: 60px !important; /* Significantly taller */
+        padding: 20px 24px !important;
+        height: 50px !important;
+        /* Significantly taller */
         font-size: 1.1rem !important;
     }
 
@@ -570,7 +574,8 @@
         width: 100%;
     }
 
-    .btn-search, .btn-clear {
+    .btn-search,
+    .btn-clear {
         flex: 1;
         padding: 0.85rem;
         justify-content: center;
@@ -580,7 +585,8 @@
 
     .categories-table {
         font-size: 0.85rem;
-        min-width: 600px; /* Force scroll */
+        min-width: 600px;
+        /* Force scroll */
     }
 
     .categories-table thead th:nth-child(1),
@@ -596,7 +602,7 @@
     }
 
     .search-buttons-group {
-        flex-direction: row; /* Keep buttons side by side if possible */
+        flex-direction: row;
+        /* Keep buttons side by side if possible */
     }
 }
-
