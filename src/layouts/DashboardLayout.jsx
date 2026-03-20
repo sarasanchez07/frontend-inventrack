@@ -11,12 +11,16 @@ import {
     ChevronLeft,
     ChevronRight,
     Box,
-    Settings
+    Settings,
+    Menu,
+    X
 } from 'lucide-react';
+
 import './DashboardLayout.css';
 
 const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inventoryId = null }) => {
     const [collapsed, setCollapsed] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -24,6 +28,11 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
         localStorage.removeItem('user');
         navigate('/login');
     };
+
+    const toggleMobileMenu = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
 
     // Prefijo de ruta: si estamos dentro de un inventario específico,
     // los links del sidebar deben ser contextuales a ese inventario
@@ -51,7 +60,18 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
 
     return (
         <div className="dashboard-container">
-            <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+            {/* Mobile Header */}
+            <header className="mobile-header">
+                <div className="mobile-logo">
+                    <Box size={24} color="#f38d31" />
+                    <span>InvenTrack</span>
+                </div>
+                <button className="mobile-toggle" onClick={toggleMobileMenu}>
+                    {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+            </header>
+
+            <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'active' : ''}`}>
                 <div className="sidebar-header">
                     <div className="logo-box">
                         <Box size={32} color="#f38d31" />
@@ -62,6 +82,10 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
                             <span className="brand-tagline">Sistema de gestion</span>
                         </div>
                     )}
+                    {/* Botón para cerrar en móvil */}
+                    <button className="mobile-close-btn" onClick={() => setMobileOpen(false)}>
+                        <X size={20} />
+                    </button>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -70,6 +94,7 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
                             key={item.path}
                             to={item.path}
                             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                            onClick={() => setMobileOpen(false)}
                         >
                             <item.icon size={22} className="nav-icon" />
                             {!collapsed && <span className="nav-text">{item.name}</span>}
@@ -89,11 +114,15 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
                 </div>
             </aside>
 
+            {/* Overlay para móvil */}
+            {mobileOpen && <div className="mobile-sidebar-overlay" onClick={() => setMobileOpen(false)}></div>}
+
             <main className="main-content">
                 {children}
             </main>
         </div>
     );
+
 };
 
 export default DashboardLayout;

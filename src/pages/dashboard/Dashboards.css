@@ -44,7 +44,9 @@
     font-size: 1rem;
     font-weight: 600;
     color: var(--gray-800);
+    text-align: center;
 }
+
 
 .stat-value {
     font-size: 4rem;
@@ -433,3 +435,91 @@
     background: #e5e5e5;
     border-color: var(--gray-300);
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .page-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        gap: 1rem;
+        margin-bottom: 2rem;
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .stat-value {
+        font-size: 3rem;
+    }
+
+    .inventory-section {
+        padding: 1.5rem;
+        min-height: auto;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-add-inventory {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .inventory-item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .btn-open-inventory {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .inv-row-desc {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .progress-legend {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-value {
+        font-size: 2.5rem;
+    }
+
+    .progress-legend {
+        justify-content: flex-start;
+    }
+
+    .modal-card {
+        padding: 1.5rem;
+        width: 95%;
+        margin: 10px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+}
+
