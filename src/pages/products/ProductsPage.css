@@ -639,6 +639,7 @@
     .search-input-wrapper input {
         height: 40px !important;
         padding-left: 1rem !important;
+        padding-right: 1rem !important;
         font-size: 1.1rem !important;
     }
 
