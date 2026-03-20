@@ -407,8 +407,8 @@
     }
 
     .search-input {
-        height: 60px !important; /* Significantly taller */
-        padding-left: 3rem !important;
+        height: 40px !important; /* Significantly taller */
+        padding-left: 2rem !important;
         font-size: 1.1rem !important;
     }
 
