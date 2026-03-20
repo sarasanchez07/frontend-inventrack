@@ -556,7 +556,7 @@
     .search-input {
         width: 100%;
         padding: 20px 24px !important;
-        height: 50px !important;
+        height: 100% !important;
         /* Significantly taller */
         font-size: 1.1rem !important;
     }
