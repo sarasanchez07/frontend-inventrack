@@ -557,9 +557,15 @@
 
     .input-with-icon input,
     .search-input-wrapper select {
-        height: 52px; /* Increased height as requested */
-        font-size: 1rem;
+        height: 60px !important; /* Significantly taller */
+        padding-left: 3rem !important;
+        font-size: 1.1rem !important;
     }
+
+    .search-input-wrapper select {
+        padding-left: 1rem !important; /* Select doesn't have icon at the same place */
+    }
+
 
     .search-action-btns {
         width: 100%;

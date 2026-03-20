@@ -552,10 +552,11 @@
 
     .search-input {
         width: 100%;
-        padding: 0 16px;
-        height: 52px; /* Increased height as requested */
-        font-size: 1.1rem;
+        padding: 0 24px !important;
+        height: 60px !important; /* Significantly taller */
+        font-size: 1.1rem !important;
     }
+
 
 
     .search-inventory-filter {
