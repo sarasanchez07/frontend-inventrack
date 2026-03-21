@@ -219,8 +219,11 @@ const ProductsPage = () => {
                                 ))}
                             </select>
                         </div>
-                        <button className="btn-search" onClick={handleSearch}>Buscar</button>
-                        <button className="btn-clear" onClick={handleClear}><RotateCcw size={18} /> Limpiar</button>
+                        <div className="search-buttons-group">
+                            <button className="btn-search" onClick={handleSearch}>Buscar</button>
+                            <button className="btn-clear" onClick={handleClear}><RotateCcw size={18} /> Limpiar</button>
+                        </div>
+
                     </div>
                 </div>
 
