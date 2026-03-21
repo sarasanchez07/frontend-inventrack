@@ -157,9 +157,9 @@
 }
 
 .btn-clear {
-    background-color: #ffffff;
-    color: #64748b;
-    border: 1.5px solid #e2e8f0;
+    background-color: var(--primary);
+    color: white !important;
+    border: none;
     padding: 0 30px;
     height: 42px;
     border-radius: 14px;
@@ -168,8 +168,9 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
 }
+
 
 .search-buttons-group {
     display: flex;

@@ -7,7 +7,7 @@ import ProductMovementsModal from '../../components/products/ProductMovementsMod
 import productService from '../../services/productService';
 import categoryService from '../../services/categoryService';
 import dashboardService from '../../services/dashboardService';
-import { Plus, X, Search, RotateCcw, Layers } from 'lucide-react';
+import { Plus, X, Search, Layers } from 'lucide-react';
 import './ProductsPage.css';
 
 const ProductsPage = () => {
@@ -221,8 +221,9 @@ const ProductsPage = () => {
                         </div>
                         <div className="search-buttons-group">
                             <button className="btn-search" onClick={handleSearch}>Buscar</button>
-                            <button className="btn-clear" onClick={handleClear}><RotateCcw size={18} /> Limpiar</button>
+                            <button className="btn-clear" onClick={handleClear}>Limpiar</button>
                         </div>
+
 
                     </div>
                 </div>
