@@ -134,9 +134,9 @@
 }
 
 .btn-clear-staff {
-    background: #f38d31;
-    color: white;
-    border: none;
+    background: #ffffff;
+    color: #f38d31;
+    border: 1.5px solid #f38d31;
     height: 44px;
     padding: 0 32px;
     border-radius: 8px;
@@ -147,8 +147,9 @@
 }
 
 .btn-clear-staff:hover {
-    background: #e67e22;
+    background: #fff7ed;
 }
+
 
 
 .staff-search-buttons {

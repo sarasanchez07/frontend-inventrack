@@ -157,9 +157,9 @@
 }
 
 .btn-clear {
-    background-color: var(--primary);
-    color: white !important;
-    border: none;
+    background-color: #ffffff;
+    color: var(--primary) !important;
+    border: 1.5px solid var(--primary);
     padding: 0 30px;
     height: 42px;
     border-radius: 14px;
@@ -170,6 +170,7 @@
     align-items: center;
     justify-content: center;
 }
+
 
 
 .search-buttons-group {
