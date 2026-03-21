@@ -21,6 +21,7 @@ const StaffPage = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [assignedInventories, setAssignedInventories] = useState([]);
+    const [isActive, setIsActive] = useState(true);
 
     const fetchStaff = async () => {
         setLoading(true);
@@ -56,6 +57,7 @@ const StaffPage = () => {
             setPassword('');
             setRole(person.role || '');
             setAssignedInventories(person.assigned_inventories || []);
+            setIsActive(person.is_active !== undefined ? person.is_active : true);
         } else {
             setEditingStaffId(null);
             setFullName('');
@@ -63,6 +65,7 @@ const StaffPage = () => {
             setPassword('');
             setRole('');
             setAssignedInventories([]);
+            setIsActive(true);
         }
         setIsModalOpen(true);
     };
@@ -87,7 +90,8 @@ const StaffPage = () => {
                 first_name: fullName,
                 email,
                 role,
-                assigned_inventories: assignedInventories
+                assigned_inventories: assignedInventories,
+                is_active: isActive
             };
 
             if (password) {
@@ -159,24 +163,28 @@ const StaffPage = () => {
                                 <th>Nombre</th>
                                 <th>Correo</th>
                                 <th>Rol</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td colSpan="4" style={{ textAlign: 'center' }}>Cargando personal...</td>
+                                    <td colSpan="5" style={{ textAlign: 'center' }}>Cargando personal...</td>
                                 </tr>
                             ) : filteredStaff.length === 0 ? (
                                 <tr>
-                                    <td colSpan="4" style={{ textAlign: 'center' }}>No se encontro personal registrado.</td>
+                                    <td colSpan="5" style={{ textAlign: 'center' }}>No se encontro personal registrado.</td>
                                 </tr>
                             ) : (
                                 filteredStaff.map(person => (
-                                    <tr key={person.id}>
+                                    <tr key={person.id} className={!person.is_active ? 'row-inactive' : ''}>
                                         <td>{person.first_name || 'N/A'}</td>
                                         <td>{person.email}</td>
                                         <td style={{ textTransform: 'capitalize' }}>{person.role}</td>
+                                        <td className={person.is_active ? 'status-active' : 'status-inactive'}>
+                                            {person.is_active ? 'Activo' : 'Inactivo'}
+                                        </td>
                                         <td>
                                             <button
                                                 className="btn-edit-staff"
@@ -266,6 +274,23 @@ const StaffPage = () => {
                                             {inv.name}
                                         </label>
                                     ))}
+                                </div>
+                            </div>
+
+                            <div className="staff-form-group">
+                                <label>Estado del Personal</label>
+                                <div className="toggle-container" onClick={() => setIsActive(!isActive)}>
+                                    <div className="toggle-switch">
+                                        <input
+                                            type="checkbox"
+                                            checked={isActive}
+                                            onChange={() => { }} // Handled by container onClick
+                                        />
+                                        <span className="slider"></span>
+                                    </div>
+                                    <span className="toggle-label">
+                                        {isActive ? 'Personal Activo (Puede ingresar)' : 'Personal Inactivo (Acceso restringido)'}
+                                    </span>
                                 </div>
                             </div>
 
