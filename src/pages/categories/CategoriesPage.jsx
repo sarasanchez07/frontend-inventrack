@@ -5,7 +5,8 @@ import DashboardLayout from '../../layouts/DashboardLayout';
 import CategoryFormModal from '../../components/categories/CategoryFormModal';
 import CategoryProductsModal from '../../components/categories/CategoryProductsModal';
 import categoryService from '../../services/categoryService';
-import { Plus, X } from 'lucide-react';
+import { Plus, X, Search } from 'lucide-react';
+
 import './CategoriesPage.css';
 
 const CategoriesPage = () => {
