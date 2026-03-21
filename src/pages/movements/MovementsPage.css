@@ -521,6 +521,10 @@
     color: var(--gray-500);
     gap: 1rem;
 }
+.empty-state-admin p {
+    margin: 0;
+    font-weight: 300;
+}
 
 .empty-icon {
     width: 250px;
