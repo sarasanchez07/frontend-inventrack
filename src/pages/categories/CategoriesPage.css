@@ -554,10 +554,11 @@
     }
 
     .search-input {
-        height: 40px !important; /* Significantly taller */
-        padding-left: 1rem !important;
+        height: 40px !important;
+        padding-left: 2rem !important;
         font-size: 1.1rem !important;
     }
+
 
     .search-inventory-filter {
         width: 100%;
