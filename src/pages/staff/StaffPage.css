@@ -116,13 +116,12 @@
 }
 
 .btn-search-staff {
-    background: #f38d31;
-    color: white;
+    padding: 0.75rem 2rem;
+    background: var(--primary);
+    color: var(--white);
     border: none;
-    height: 44px;
-    padding: 0 32px;
     border-radius: 8px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s;
