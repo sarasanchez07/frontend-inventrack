@@ -298,10 +298,10 @@ const ProductsPage = () => {
                             </tbody>
                         </table>
                     ) : (
-                        <div className="empty-state">
-                            <Search size={40} />
-                            <p>No se encontraron productos en este inventario.</p>
+                        <div className="products-empty-state">
+                            <p>No se encontraron productos<br />en este inventario o con este nombre.</p>
                         </div>
+
                     )}
                 </div>
             </div>

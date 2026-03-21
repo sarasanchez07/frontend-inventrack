@@ -335,11 +335,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Ensure vertical centering too */
     gap: 16px;
     width: 100%;
-    /* Take full width */
 }
+
+.products-empty-state {
+    padding: 5rem 2rem;
+    text-align: center;
+    color: #94a3b8; /* Lighter gray */
+    background: #ffffff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.products-empty-state p {
+    margin: 0;
+    font-weight: 500;
+}
+
 
 /* Inventory Selector in Search Row */
 .inventory-selector-wrapper {
