@@ -466,7 +466,9 @@ const MovementsPage = () => {
                                     </tbody>
                                 </table>
                             ) : (
-                                <div></div>
+                                <div className="empty-state-admin">
+                                    <p>No tiene registros</p>
+                                </div>
                             )}
                         </div>
                     </div>
