@@ -93,7 +93,7 @@ const ProductMovementsModal = ({ isOpen, onClose, product }) => {
                             <option value="ALL">Tipo de movimiento</option>
                             <option value="IN">Entrada</option>
                             <option value="OUT">Salida</option>
-                            <option value="CANCELLED">Anulado</option>
+
                         </select>
                         <button className="btn-modal-filter" onClick={handleFilter}>
                             <Filter size={16} />
