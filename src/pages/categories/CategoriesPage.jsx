@@ -195,15 +195,18 @@ const CategoriesPage = () => {
                 <div className="categories-search-section">
                     <h3 className="search-label">Buscar categorías</h3>
                     <div className="search-row">
-                        <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Busca una categoría por su nombre..."
+                        <div className="search-input-wrapper">
+                            <Search size={20} className="search-icon" />
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Busca una categoría por su nombre..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                            />
+                        </div>
 
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onKeyDown={handleKeyDown}
-                        />
 
                         {/* Filtro por inventario - solo se muestra si NO estamos en una vista específica */}
                         {!inventoryId && (

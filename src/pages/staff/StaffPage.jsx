@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { staffService } from '../../services/staffService';
 import api from '../../services/api';
+import { Users } from 'lucide-react';
 import './StaffPage.css';
+
 
 const StaffPage = () => {
     const [staff, setStaff] = useState([]);
@@ -131,13 +133,17 @@ const StaffPage = () => {
                 <div className="staff-search-section">
                     <h4>Buscar Personal</h4>
                     <div className="search-controls">
-                        <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Busca a tu personal por su nombre o correo..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
+                        <div className="search-input-wrapper">
+                            <Users size={20} className="search-icon" />
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Busca a tu personal por su nombre o correo..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
+
                         <div className="staff-search-buttons">
                             <button className="btn-search-staff">Buscar</button>
                             <button className="btn-clear-staff" onClick={() => setSearchQuery('')}>Limpiar</button>
