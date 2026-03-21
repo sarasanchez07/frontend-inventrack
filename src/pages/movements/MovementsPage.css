@@ -558,9 +558,8 @@
     .input-with-icon input,
     .search-input-wrapper select {
         height: 40px !important;
-        padding: 0 1rem 0 2rem !important;
+        padding: 2rem !important;
         font-size: 1.1rem !important;
-        line-height: normal !important;
     }
 
     .search-input-wrapper select {
@@ -582,4 +581,4 @@
         align-items: center;
         height: 48px;
     }
-}
+}

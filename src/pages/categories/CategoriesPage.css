@@ -554,12 +554,15 @@
     }
 
     .search-input {
-        width: 100%;
+        width: 100% !important;
         height: 40px !important;
-        padding: 0 1rem 0 2rem !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        padding: 0 1rem 0 2.5rem !important;
         font-size: 1.1rem !important;
         line-height: normal !important;
     }
+
 
 
 
