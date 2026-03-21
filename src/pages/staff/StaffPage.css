@@ -150,7 +150,14 @@
     background: #fff7ed;
 }
 
+.staff-search-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 .staff-table-container {
+
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
