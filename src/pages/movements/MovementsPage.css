@@ -558,13 +558,16 @@
     .input-with-icon input,
     .search-input-wrapper select {
         height: 40px !important;
-        padding-left: 2rem !important;
+        padding: 0 1rem 0 2rem !important;
         font-size: 1.1rem !important;
+        line-height: normal !important;
     }
 
     .search-input-wrapper select {
-        padding-left: 1rem !important;
+        padding: 0 1rem !important;
+        font-size: 0.95rem !important; /* Lower font size to fit "Todos los movimientos" */
     }
+
 
 
 
