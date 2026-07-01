@@ -24,8 +24,8 @@ const DashboardLayout = ({ children, role = 'admin', isSpecificView = false, inv
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
         navigate('/login');
     };
 

@@ -18,6 +18,8 @@ const ProductsPage = () => {
 
     // Data
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [count, setCount] = useState(0);
     const [categories, setCategories] = useState([]);
     const [units, setUnits] = useState([]);
     const [presentations, setPresentations] = useState([]);
@@ -60,10 +62,14 @@ const ProductsPage = () => {
         loadMetadata();
     }, [inventoryId]);
 
+    useEffect(() => {
+        setPage(1);
+    }, [inventoryId]);
+
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
-            const params = {};
+            const params = { page };
             if (inventoryId) params.inventory_id = inventoryId;
             if (searchTerm) params.search = searchTerm;
             if (filterCategoryId) params.category_id = filterCategoryId;
@@ -71,13 +77,19 @@ const ProductsPage = () => {
             console.log('Fetching products with params:', params);
             const data = await productService.getProducts(params);
             console.log('Products received:', data);
-            setProducts(data);
+            if (data && data.results !== undefined) {
+                setProducts(data.results);
+                setCount(data.count || 0);
+            } else {
+                setProducts(data || []);
+                setCount(data ? data.length : 0);
+            }
         } catch (error) {
             console.error('Error fetching products:', error);
         } finally {
             setLoading(false);
         }
-    }, [inventoryId, searchTerm, filterCategoryId]);
+    }, [inventoryId, searchTerm, filterCategoryId, page]);
 
     useEffect(() => {
         fetchProducts();
@@ -90,10 +102,14 @@ const ProductsPage = () => {
         }
     }, [isAdmin, inventoryId, inventories, navigate]);
 
-    const handleSearch = () => fetchProducts();
+    const handleSearch = () => {
+        setPage(1);
+        fetchProducts();
+    };
     const handleClear = () => {
         setSearchTerm('');
         setFilterCategoryId('');
+        setPage(1);
         fetchProducts();
     };
 
@@ -306,6 +322,28 @@ const ProductsPage = () => {
                             <p>No se encontraron productos<br />en este inventario o con este nombre.</p>
                         </div>
 
+                    )}
+
+                    {(!loading && products.length > 0) && (
+                        <div className="pagination-container">
+                            <button 
+                                className="btn-pagination" 
+                                onClick={() => setPage(p => Math.max(p - 1, 1))}
+                                disabled={page === 1}
+                            >
+                                Anterior
+                            </button>
+                            <span className="pagination-info">
+                                Página {page} de {Math.ceil(count / 20) || 1} ({count} productos)
+                            </span>
+                            <button 
+                                className="btn-pagination" 
+                                onClick={() => setPage(p => (p * 20 < count ? p + 1 : p))}
+                                disabled={page * 20 >= count}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>

@@ -36,6 +36,8 @@ const MovementsPage = () => {
 
     // ─── Admin Table State ───
     const [movements, setMovements] = useState([]);
+    const [page, setPage] = useState(1);
+    const [count, setCount] = useState(0);
     const [searchUser, setSearchUser] = useState('');
     const [filterType, setFilterType] = useState('');
     const [loadingTable, setLoadingTable] = useState(false);
@@ -44,7 +46,7 @@ const MovementsPage = () => {
     useEffect(() => {
         const loadProducts = async () => {
             try {
-                const params = inventoryId ? { inventory_id: inventoryId } : {};
+                const params = inventoryId ? { inventory_id: inventoryId, all: true } : { all: true };
                 const data = await productService.getProducts(params);
                 setProducts(data);
             } catch (err) {
@@ -59,19 +61,29 @@ const MovementsPage = () => {
         if (!isAdmin) return; // Personal can only see the 45s table, Admin sees all
         setLoadingTable(true);
         try {
-            const params = {};
+            const params = { page };
             if (inventoryId) params.inventory_id = inventoryId;
             if (searchUser.trim()) params.search_user = searchUser.trim();
             if (filterType) params.type = filterType;
 
             const data = await movementService.getMovements(params);
-            setMovements(data);
+            if (data && data.results !== undefined) {
+                setMovements(data.results);
+                setCount(data.count || 0);
+            } else {
+                setMovements(data || []);
+                setCount(data ? data.length : 0);
+            }
         } catch (err) {
             console.error("Error cargando movimientos:", err);
         } finally {
             setLoadingTable(false);
         }
-    }, [isAdmin, inventoryId, searchUser, filterType]);
+    }, [isAdmin, inventoryId, searchUser, filterType, page]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [inventoryId]);
 
     useEffect(() => {
         if (isAdmin) {
@@ -373,7 +385,7 @@ const MovementsPage = () => {
                                         placeholder="Nombre o correo..."
                                         value={searchUser}
                                         onChange={(e) => setSearchUser(e.target.value)}
-                                        onKeyDown={(e) => e.key === 'Enter' && loadMovements()}
+                                        onKeyDown={(e) => e.key === 'Enter' && (setPage(1), setTimeout(loadMovements, 0))}
                                     />
                                 </div>
                             </div>
@@ -392,10 +404,14 @@ const MovementsPage = () => {
                                 </select>
                             </div>
                             <div className="search-action-btns">
-                                <button className="btn-search-admin" onClick={loadMovements}>Buscar</button>
+                                <button className="btn-search-admin" onClick={() => {
+                                    setPage(1);
+                                    setTimeout(loadMovements, 0);
+                                }}>Buscar</button>
                                 <button className="btn-clear-admin" onClick={() => {
                                     setSearchUser('');
                                     setFilterType('');
+                                    setPage(1);
                                     setTimeout(loadMovements, 0);
                                 }}>Limpiar</button>
                             </div>
@@ -471,6 +487,28 @@ const MovementsPage = () => {
                                 </div>
                             )}
                         </div>
+
+                        {(!loadingTable && movements.length > 0) && (
+                            <div className="pagination-container">
+                                <button 
+                                    className="btn-pagination" 
+                                    onClick={() => setPage(p => Math.max(p - 1, 1))}
+                                    disabled={page === 1}
+                                >
+                                    Anterior
+                                </button>
+                                <span className="pagination-info">
+                                    Página {page} de {Math.ceil(count / 20) || 1} ({count} movimientos)
+                                </span>
+                                <button 
+                                    className="btn-pagination" 
+                                    onClick={() => setPage(p => (p * 20 < count ? p + 1 : p))}
+                                    disabled={page * 20 >= count}
+                                >
+                                    Siguiente
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
