@@ -54,14 +54,14 @@ const MovementsPage = () => {
             }
         };
         loadProducts();
-    }, [inventoryId]);
+    }, [inventoryId, recentMovement]);
 
     // ─── Fetch Movements (Admin & Personal History if needed, but mainly Admin) ───
-    const loadMovements = useCallback(async () => {
+    const loadMovements = useCallback(async (overridePage, showTableLoading = true) => {
         if (!isAdmin) return; // Personal can only see the 45s table, Admin sees all
-        setLoadingTable(true);
+        if (showTableLoading) setLoadingTable(true);
         try {
-            const params = { page };
+            const params = { page: overridePage ?? page };
             if (inventoryId) params.inventory_id = inventoryId;
             if (searchUser.trim()) params.search_user = searchUser.trim();
             if (filterType) params.type = filterType;
@@ -77,7 +77,7 @@ const MovementsPage = () => {
         } catch (err) {
             console.error("Error cargando movimientos:", err);
         } finally {
-            setLoadingTable(false);
+            if (showTableLoading) setLoadingTable(false);
         }
     }, [isAdmin, inventoryId, searchUser, filterType, page]);
 
@@ -89,6 +89,17 @@ const MovementsPage = () => {
         if (isAdmin) {
             loadMovements();
         }
+    }, [isAdmin, inventoryId, searchUser, filterType, page]);
+
+    // ─── Polling: auto-refresh movements every 10s ───
+    useEffect(() => {
+        if (!isAdmin) return;
+        const interval = setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                loadMovements(undefined, false);
+            }
+        }, 15000);
+        return () => clearInterval(interval);
     }, [loadMovements, isAdmin]);
 
     // ─── Form Handling ───
@@ -376,7 +387,7 @@ const MovementsPage = () => {
                         <h2 className="section-title">Movimientos de tu personal</h2>
 
                         <div className="admin-search-row">
-                            <div className="search-input-wrapper">
+                            <div className="admin-search-field">
                                 <label>Buscar Personal</label>
                                 <div className="input-with-icon">
                                     <Users className="field-icon" size={18} />
@@ -385,11 +396,11 @@ const MovementsPage = () => {
                                         placeholder="Nombre o correo..."
                                         value={searchUser}
                                         onChange={(e) => setSearchUser(e.target.value)}
-                                        onKeyDown={(e) => e.key === 'Enter' && (setPage(1), setTimeout(loadMovements, 0))}
+                                        onKeyDown={(e) => e.key === 'Enter' && (setPage(1), loadMovements(1))}
                                     />
                                 </div>
                             </div>
-                            <div className="search-input-wrapper">
+                            <div className="admin-search-field">
                                 <label>Tipo de movimientos</label>
                                 <select
                                     value={filterType}
@@ -406,13 +417,13 @@ const MovementsPage = () => {
                             <div className="search-action-btns">
                                 <button className="btn-search-admin" onClick={() => {
                                     setPage(1);
-                                    setTimeout(loadMovements, 0);
+                                    loadMovements(1);
                                 }}>Buscar</button>
                                 <button className="btn-clear-admin" onClick={() => {
                                     setSearchUser('');
                                     setFilterType('');
                                     setPage(1);
-                                    setTimeout(loadMovements, 0);
+                                    loadMovements(1);
                                 }}>Limpiar</button>
                             </div>
                         </div>

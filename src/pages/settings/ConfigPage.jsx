@@ -217,6 +217,15 @@ const ConfigPage = () => {
                                 <input
                                     type="checkbox"
                                     className="switch-checkbox"
+                                    checked={switches.has_quantity_per_presentation}
+                                    onChange={(e) => setSwitches({ ...switches, has_quantity_per_presentation: e.target.checked })}
+                                />
+                                <label className="switch-label">Activa esta opción si los productos tienen una cantidad fija por presentación (ej: 20 pastillas por tableta). Requiere que "Presentación" esté activado.</label>
+                            </div>
+                            <div className="switch-item">
+                                <input
+                                    type="checkbox"
+                                    className="switch-checkbox"
                                     checked={switches.has_expiration_date}
                                     onChange={(e) => setSwitches({ ...switches, has_expiration_date: e.target.checked })}
                                 />

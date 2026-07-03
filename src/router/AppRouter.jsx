@@ -143,7 +143,7 @@ const AppRouter = () => {
 
                 {/* Redirection */}
                 <Route path="/" element={<Navigate to="/login" replace />} />
-                <Route path="*" element={<Navigate to="/login" replace />} />
+                <Route path="*" element={<Navigate to="/personal" replace />} />
             </Routes>
         </BrowserRouter>
     );

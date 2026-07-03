@@ -66,8 +66,8 @@ const ProductsPage = () => {
         setPage(1);
     }, [inventoryId]);
 
-    const fetchProducts = useCallback(async () => {
-        setLoading(true);
+    const fetchProducts = useCallback(async (showLoading = true) => {
+        if (showLoading) setLoading(true);
         try {
             const params = { page };
             if (inventoryId) params.inventory_id = inventoryId;
@@ -87,12 +87,21 @@ const ProductsPage = () => {
         } catch (error) {
             console.error('Error fetching products:', error);
         } finally {
-            setLoading(false);
+            if (showLoading) setLoading(false);
         }
     }, [inventoryId, searchTerm, filterCategoryId, page]);
 
     useEffect(() => {
         fetchProducts();
+    }, [inventoryId, searchTerm, filterCategoryId, page]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                fetchProducts(false);
+            }
+        }, 15000);
+        return () => clearInterval(interval);
     }, [fetchProducts]);
 
     useEffect(() => {

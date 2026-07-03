@@ -109,8 +109,8 @@ const AlertModal = ({ isOpen, onClose, alerts, onRefresh }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {alerts.map((alert, index) => (
-                                        <tr key={index}>
+                                    {alerts.map((alert) => (
+                                        <tr key={alert.product_id}>
                                             <td className="product-name-cell">{alert.product_name}</td>
                                             <td>{alert.current_stock}</td>
                                             <td>{alert.inventory}</td>

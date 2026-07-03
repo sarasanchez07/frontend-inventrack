@@ -9,7 +9,11 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const savedUser = sessionStorage.getItem('user');
         if (savedUser) {
-            setUser(JSON.parse(savedUser));
+            try {
+                setUser(JSON.parse(savedUser));
+            } catch {
+                sessionStorage.removeItem('user');
+            }
         }
         setLoading(false);
     }, []);

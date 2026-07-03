@@ -203,8 +203,8 @@ const ReportsPage = () => {
                                     <td colSpan={isAdmin ? 8 : 7}>No hay movimientos registrados para los filtros seleccionados.</td>
                                 </tr>
                             ) : (
-                                reports.map((report, index) => (
-                                    <tr key={index}>
+                                reports.map((report) => (
+                                    <tr key={report.id}>
                                         <td>{report.product_name}</td>
                                         <td>{formatDate(report.created_at)}</td>
                                         <td>{report.type === 'IN' ? 'Entrada' : 'Salida'}</td>
@@ -226,7 +226,7 @@ const ReportsPage = () => {
                         onClick={handleExportCSV}
                         disabled={reports.length === 0}
                     >
-                        Exportar en CVS
+                        Exportar en CSV
                     </button>
                     <button
                         className="btn-export"

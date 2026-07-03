@@ -285,65 +285,65 @@
     box-shadow: var(--card-shadow);
 }
 
-.search-input-wrapper {
-    align-items: start;
-    flex: 1;
-    min-width: 220px;
+.admin-search-field {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    flex: 1;
+    min-width: 250px;
 }
 
-.search-input-wrapper label {
+.admin-search-field label {
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: var(--gray-900);
 }
 
-.input-with-icon {
+.admin-search-field .field-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--gray-400);
+    pointer-events: none;
+}
+
+.admin-search-field .input-with-icon {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 430px;
 }
 
-
-.field-icon {
-    position: absolute;
-    left: 12px;
-    color: var(--gray-400);
-}
-
-.input-with-icon input {
+.admin-search-field .input-with-icon input {
     width: 100%;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    height: 42px;
+    padding: 0.65rem 1rem 0.65rem 2.5rem;
     border: 1.5px solid var(--gray-300);
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--gray-800);
     background: var(--white);
-    transition: all 0.2s;
+    transition: border-color 0.2s;
 }
 
-.input-with-icon input:focus {
+.admin-search-field .input-with-icon input:focus {
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 0 0 3px rgba(243, 141, 49, 0.1);
 }
 
-.search-input-wrapper select {
+.admin-search-field select {
     width: 100%;
-    padding: 0.75rem 1rem;
+    height: 42px;
+    padding: 0.65rem 1rem;
     border: 1.5px solid var(--gray-300);
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--gray-800);
     background: var(--white);
-    transition: all 0.2s;
+    transition: border-color 0.2s;
 }
 
-.search-input-wrapper select:focus {
+.admin-search-field select:focus {
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 0 0 3px rgba(243, 141, 49, 0.1);

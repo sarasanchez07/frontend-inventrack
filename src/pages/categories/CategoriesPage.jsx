@@ -63,10 +63,9 @@ const CategoriesPage = () => {
         }
     }, [inventoryId, filterInventoryId]);
 
-    // Load on mount and when inventoryId changes
     useEffect(() => {
         fetchCategories();
-    }, [fetchCategories, inventoryId]);
+    }, [inventoryId, filterInventoryId]);
 
     // Constant for the title of the current inventory if we are in a specific view
     const currentInventoryName = inventoryId && inventories.length > 0
