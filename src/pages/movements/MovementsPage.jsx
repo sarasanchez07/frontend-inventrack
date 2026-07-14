@@ -227,12 +227,12 @@ const MovementsPage = () => {
                                 {isEditing ? 'Editar movimiento' : 'Registrar movimiento'}
                             </h1>
                         </div>
-                        {isAdmin && inventoryId && (
+                        {inventoryId && (
                             <div className="movements-header-right">
                                 <button
                                     type="button"
                                     className="category-close-btn"
-                                    onClick={() => navigate('/admin')}
+                                    onClick={() => navigate(isAdmin ? '/admin' : '/personal')}
                                     title="Volver al Inventario General"
                                 >
                                     <X size={20} />

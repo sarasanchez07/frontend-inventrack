@@ -104,13 +104,6 @@ const ProductsPage = () => {
         return () => clearInterval(interval);
     }, [fetchProducts]);
 
-    useEffect(() => {
-        // Redirigir a personal si no tiene ID d einventario pero tiene inventarios asignados
-        if (!isAdmin && !inventoryId && inventories.length > 0) {
-            navigate(`/inventory/${inventories[0].id}/products`, { replace: true });
-        }
-    }, [isAdmin, inventoryId, inventories, navigate]);
-
     const handleSearch = () => {
         setPage(1);
         fetchProducts();
@@ -140,8 +133,11 @@ const ProductsPage = () => {
             setIsFormOpen(false);
             fetchProducts();
         } catch (error) {
-            console.error('Error saving product:', error);
-            alert('Error al guardar el producto. Verifique los datos.');
+            const msg = error.response?.data?.code?.[0]
+                || error.response?.data?.error
+                || error.response?.data?.message
+                || 'Error al guardar el producto. Verifique los datos.';
+            alert(msg);
         }
     };
 
@@ -181,8 +177,8 @@ const ProductsPage = () => {
         return null;
     };
 
-    const activeInventoryId = inventoryId || (!isAdmin && inventories.length > 0 ? inventories[0].id : null);
-    const activeConfig = currentInventoryConfig.switches ? currentInventoryConfig : (inventories.length > 0 && !isAdmin ? inventories[0].config : {});
+    const activeInventoryId = inventoryId || null;
+    const activeConfig = currentInventoryConfig.switches ? currentInventoryConfig : {};
     const modalUnits = activeConfig.catalogos?.unidades || units;
     const modalPresentations = activeConfig.catalogos?.presentaciones || presentations;
 
@@ -211,8 +207,8 @@ const ProductsPage = () => {
                                 <Plus size={20} /> Registrar Producto
                             </button>
                         )}
-                        {isAdmin && inventoryId && (
-                            <button className="category-close-btn" onClick={() => navigate('/admin')} title="Cerrar">
+                        {inventoryId && (
+                            <button className="category-close-btn" onClick={() => navigate(isAdmin ? '/admin' : '/personal')} title="Cerrar">
                                 <X size={20} />
                             </button>
                         )}

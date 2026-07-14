@@ -177,12 +177,12 @@ const CategoriesPage = () => {
                             Registrar categoría
                         </button>
 
-                        {/* Botón de cerrar (X) para el Admin cuando está en un inventario específico */}
-                        {isAdmin && inventoryId && (
+                        {/* Botón de cerrar (X) cuando está en un inventario específico */}
+                        {inventoryId && (
                             <button
                                 type="button"
                                 className="category-close-btn"
-                                onClick={() => navigate('/admin')}
+                                onClick={() => navigate(isAdmin ? '/admin' : '/personal')}
                                 title="Volver al Inventario General"
                             >
                                 <X size={20} />

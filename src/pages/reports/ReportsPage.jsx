@@ -122,11 +122,11 @@ const ReportsPage = () => {
             <div className="reports-page">
                 <div className="page-header justify-between">
                     <h2 className="page-title">{title}</h2>
-                    {isAdmin && inventoryId && (
+                    {inventoryId && (
                         <button
                             type="button"
                             className="close-btn"
-                            onClick={() => navigate('/admin')}
+                            onClick={() => navigate(isAdmin ? '/admin' : '/personal')}
                             title="Volver al Inventario General"
                         >
                             <X size={20} />

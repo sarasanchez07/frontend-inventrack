@@ -43,7 +43,7 @@ const AppRouter = () => {
                 <Route
                     path="/inventory/:inventoryId"
                     element={
-                        <ProtectedRoute allowedRoles={['admin']}>
+                        <ProtectedRoute allowedRoles={['admin', 'maestro', 'jefe', 'estudiante']}>
                             <PersonalDashboard />
                         </ProtectedRoute>
                     }
